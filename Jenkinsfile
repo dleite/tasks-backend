@@ -16,7 +16,7 @@ pipeline{
                 
             }
         }   
-		stage('Sonar Analysis'){ // estágio de testes sonsar
+		stage('Sonar Analysis'){ // estágio de testes de analise sonar
 		    environment{
 			    // cria uma variavel com o home do sonar scanner definido nas configurações "Global Tool Configuration" do jenkins (SonarQube Scanner)
 				scannerHome= tool 'SONAR_SCANNER'   
@@ -28,7 +28,15 @@ pipeline{
 					sh '${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://172.21.134.62:9000 -Dsonar.login=a57b3b94e15c1d3ad50acb56b74e4476e5fe23e2 -Dsonar.java.binaries=target'   
                 }
             }
-        }   		
+        }
+		stage('Quality Gate'){ // estágio valida a analise do sonar com quality gate
+            steps{   //steps do stage
+                timeout(time: 1, unit: 'MINUTES'){  // executa o trecho abaixo , e caso pendure, estoura por timeout em 1 minuto.
+					waitForQualityGate abortPipeline: true
+				}
+            }
+        } 
+   		
     }
 }
 
