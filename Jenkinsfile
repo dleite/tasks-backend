@@ -37,9 +37,17 @@ pipeline{
 				}
             }
         } 
+		stage('Deploy Backend'){ // estágio de deploy no tomcat
+            steps{   //steps do stage
+			    // gerado pelo pipeline-syntax, escolhida opção = "deplou: Deploy war/ear to a container"
+			    deploy adapters: [tomcat8(credentialsId: 'tomcatLogin', path: '', url: 'http://localhost:8000/')], contextPath: 'taks-backend', war: 'target/taks-backend.war'
+            }
+        } 
    		
     }
 }
+
+
 
 
 
