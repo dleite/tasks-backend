@@ -25,7 +25,7 @@ pipeline{
 			    withSonarQubeEnv('SONAR LOCAL'){  // executa os comandos seguintes dentro do ambiente sonar definido em configurações do sistema do jenkins (SonarQube servers)
 					// realizada testes do sonnar, usando a binário do scannerHome definido acima
 					// "-e" passando as variaveis geradas pelo Sonnar ao criar o token e usadas anteriormente no job free style (porem sem remover o -D)
-					sh '${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://172.22.196.210:9000 -Dsonar.login=a57b3b94e15c1d3ad50acb56b74e4476e5fe23e2 -Dsonar.java.binaries=target'   
+					sh '${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://172.21.134.62:9000 -Dsonar.login=a57b3b94e15c1d3ad50acb56b74e4476e5fe23e2 -Dsonar.java.binaries=target'   
                 }
             }
         }   		
