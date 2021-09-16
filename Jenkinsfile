@@ -3,7 +3,7 @@ pipeline{
     stages{   // estagios do pipeline
         stage('Build Backend'){ // cria um stage com nome inicio
             steps{   //steps do stage
-                sh 'mvn clean package -DskipTests=true'   // Limpa build anterior, faz um novo build skipando os testes
+                sh 'mvn clean package -DskipTests=true'   // Limpa build anterior, faz um novo build skipando os testes 
                 
             }
         }        
