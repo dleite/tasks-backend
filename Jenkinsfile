@@ -31,7 +31,7 @@ pipeline{
         }
 		stage('Quality Gate'){ // estágio valida a analise do sonar com quality gate
             steps{   //steps do stage
-			    sleep(30) // aguarda x segundos antes de pedir o relatório do quality gate ( para dar tempo de ele gerar)
+			    sleep(10) // aguarda x segundos antes de pedir o relatório do quality gate ( para dar tempo de ele gerar)
                 timeout(time: 1, unit: 'MINUTES'){  // executa o trecho abaixo , e caso pendure por que o report não está pronto, estoura por timeout em 1 minuto.
 					waitForQualityGate abortPipeline: true // Aguardo pelo quality gate e se falhar no teste, ele aborta o pipeline
 				}
