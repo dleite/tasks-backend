@@ -1,5 +1,8 @@
 pipeline{
     agent any  // agent que roda o pipeline
+	tools {
+	  maven 'MAVEN_LOCAL'
+	}
     stages{   // estagios do pipeline
         stage('Build Backend'){ // cria um stage com nome inicio
             steps{   //steps do stage
