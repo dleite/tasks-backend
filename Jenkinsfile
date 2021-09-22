@@ -62,6 +62,12 @@ pipeline{
 				}
             }
         } 
+		stage('Deploy docker'){ // estágio de deploy em container tudo que foi criado acima.
+            steps{   //steps do stage
+				sh 'docker-compose build'
+				sh 'docker-compose up -d'   // -d não prende o prompt , senão o jenkins fica preso
+			}            
+        }
    		
     }
 }
