@@ -43,15 +43,15 @@ pipeline{
 			    deploy adapters: [tomcat8(credentialsId: 'tomcatLogin', path: '', url: 'http://172.21.138.80:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
             }
         } 
-		stage('API Test'){ // estágio testes chamando a API
-            steps{   //steps do stage
-			    // gerado pelo pipeline-syntax, escolhida opção = "git: Giy" para baixar o fonte para uma pasta especifica
-			    dir('api-test'){ // cria um subdir no workspace para não sobrepor os fontes da app
-				  git url: 'https://github.com/wcaquino/tasks-api-test'  // baixa o fonte da app que chama os testes
-				  sh 'mvn test'  // executa os testes.
-				}
-            }
-        } 
+//		stage('API Test'){ // estágio testes chamando a API
+//            steps{   //steps do stage
+//			    // gerado pelo pipeline-syntax, escolhida opção = "git: Giy" para baixar o fonte para uma pasta especifica
+//			    dir('api-test'){ // cria um subdir no workspace para não sobrepor os fontes da app
+//				  git url: 'https://github.com/wcaquino/tasks-api-test'  // baixa o fonte da app que chama os testes
+//				  sh 'mvn test'  // executa os testes.
+//				}
+//            }
+//        } 
 		stage('Deploy frontend'){ // estágio de deploy no tomcat agora do frontend
             steps{   //steps do stage
 				dir('frontend'){  // cria um subdir no workspace para não sobrepor os fontes da app
