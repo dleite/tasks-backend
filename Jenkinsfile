@@ -52,16 +52,16 @@ pipeline{
 //				}
 //            }
 //        } 
-		stage('Deploy frontend'){ // estágio de deploy no tomcat ambiente teste, agora do frontend
-            steps{   //steps do stage
-				dir('frontend'){  // cria um subdir no workspace para não sobrepor os fontes da app
-				    git credentialsId: '1a5f3a7e-44c6-4f84-875e-181fdc4bcec9', url: 'https://github.com/dleite/tasks-frontend'    // baixa os fontes no subdir
-					sh 'mvn clean package'   // Limpa build anterior, faz um novo build
-					// gerado pelo pipeline-syntax, escolhida opção = "deplou: Deploy war/ear to a container"
-					deploy adapters: [tomcat8(credentialsId: 'tomcatLogin', path: '', url: 'http://172.21.138.80:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
-				}
-            }
-        } 
+//		stage('Deploy frontend'){ // estágio de deploy no tomcat ambiente teste, agora do frontend
+//            steps{   //steps do stage
+//				dir('frontend'){  // cria um subdir no workspace para não sobrepor os fontes da app
+//				    git credentialsId: '1a5f3a7e-44c6-4f84-875e-181fdc4bcec9', url: 'https://github.com/dleite/tasks-frontend'    // baixa os fontes no subdir
+//					sh 'mvn clean package'   // Limpa build anterior, faz um novo build
+//					// gerado pelo pipeline-syntax, escolhida opção = "deplou: Deploy war/ear to a container"
+//					deploy adapters: [tomcat8(credentialsId: 'tomcatLogin', path: '', url: 'http://172.21.138.80:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+//				}
+//            }
+//        } 
 		stage('Deploy docker'){ // estágio de deploy em container tudo que foi criado acima , agora em ambiente de produção.
             steps{   //steps do stage
 			    sh 'scp -rp tasks-frontend target docker-compose.yaml 172.26.52.120:/tmp'
