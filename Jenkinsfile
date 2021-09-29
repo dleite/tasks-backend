@@ -64,7 +64,7 @@ pipeline{
 //        } 
 		stage('Deploy docker'){ // estágio de deploy em container tudo que foi criado acima , agora em ambiente de produção.
             steps{   //steps do stage
-			    sh 'scp -rp tasks-frontend target docker-compose.yaml 172.26.52.120:/tmp'
+			    sh 'scp -rp tasks-frontend target docker-compose.yaml root@172.26.52.120:/tmp'
 				sh 'ssh root@172.26.52.120 "cd /tmp ; docker-compose build"'
 				sh 'ssh root@172.26.52.120 "cd /tmp ; docker-compose up -d"'   // -d não prende o prompt , senão o jenkins fica preso
 			}            
